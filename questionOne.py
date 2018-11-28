@@ -13,12 +13,12 @@ class qOut:
         self.poolSidesSurface = 1.5 * (10 + 10 + 20 + 20)    # m^2
 
         self.waterTemperature = 37 + 273    # Kelvin
-        self.waterifg = 2414  # kJ/kg @ 37°C
+        self.waterifg = 2414 * 1000    # J/kg @ 37°C
         self.waterh = 1    # TROUVER LE H DE L'EAU DANS LE BASSIN
 
         self.airTemperature = self.getAirTemperature()
-        self.airCp = 1.007 * 1000    # kJ/kgK @ 25°C
-        self.airRho = 1.614    #kg/m^3
+        self.airCp = 1.007 * 1000    # J/kgK @ 25°C
+        self.airRho = 1.1614    # kg/m^3 @ 25°C
 
         self.airViscosity = self.getAirViscosity(self.airTemperature)
         self.airReynold = self.getAirReynold()
@@ -26,14 +26,16 @@ class qOut:
         self.airNu = self.getAirNu()
         self.airK = self.getAirK(self.airTemperature)
         self.airToph = self.getAirH()
-        self.airhm = self.airToph / (self.airRho * self.airCp * 20 * np.exp(2/3))    # m/s
+        self.airThermicDiffusivity = 15.9 * 10**-6 + 6.6 * 10**-6 * (self.airTemperature - 250) / 50
+        self.Dab = 0.26 * 10**-4
+        self.airhm = self.airToph / (self.airRho * self.airCp * (self.airThermicDiffusivity / self.Dab)**(2/3))    # m/s
         self.mDot = self.getMDotEvap()
 
         # self.airSidesh = 1 # DUNNO COMMENT TROUVER CA HEHE
         self.airSidesh = self.airToph
 
         self.coldWaterTemprature = 7 + 273    # Kelvin
-        self.coldWaterCp = 4180    # À TROUVER DANS LE LIVRE
+        self.coldWaterCp = 4.198 * 1000    # J/kgK @ 7°C
 
         self.glassk = 1.4    # W/mK pyrex
         self.glassThickness = 0.015  # m
@@ -72,7 +74,6 @@ class qOut:
 
     def updateThickness(self, thickness):
         if thickness != 0:
-            self.isInsulating = True
             self.insulatingThickness = thickness
             self.updateProperties()
 
@@ -100,7 +101,7 @@ class qOut:
     def getMDotEvap(self):
         Wf = 1.9747e-5 * self.waterTemperature**2 + 1.3257e-4 * self.waterTemperature + 3.9866e-3
         Wair = 0.5 * Wf
-        return self.airRho * self.airhm * (Wf - Wair)
+        return self.airhm * (Wf - Wair) * self.poolTopSurface
 
 
     ## ENERGY Q
@@ -109,10 +110,10 @@ class qOut:
         return self.getqSurfaces() + self.getqEvap() + self.getqColdWater()
 
     def getqEvap(self):
-        return self.mDot * self.waterifg * self.poolTopSurface
+        return self.mDot * self.waterifg
 
     def getqColdWater(self):
-        return self.mDot * self.coldWaterCp * (self.waterTemperature - self.coldWaterTemprature) * self.poolTopSurface
+        return self.mDot * self.coldWaterCp * (self.waterTemperature - self.coldWaterTemprature)
 
     def getqSurfaces(self):
         equivalentR = ( (self.getTopRConvectionWithAir())**-1
@@ -141,8 +142,8 @@ class qOut:
         return 1 / (self.airSidesh * self.poolSidesSurface)
 
 
-a = qOut()
-print(a.qColdWater)
+# a = qOut()
+# print(a.qColdWater)
 # print(a.__dict__)
 # values = []
 # print(a.insulatingThickness)
@@ -152,14 +153,14 @@ print(a.qColdWater)
 #     values.append(a.qTot)
 # print(values)
 #
-# a = qOut()
-# a.updateThickness(0.001)
-# print(a.insulatingThickness)
-# values =  []
-# for i in range(5):
-#     a.updateTime(timeStep * (i + 1))
-#     values.append(a.qTot)
-# print(values)
+a = qOut()
+a.updateThickness(0.005)
+print(a.insulatingThickness)
+values =  []
+for i in range(5):
+    a.updateTime(timeStep * (i + 1))
+    values.append(a.qTot)
+print(values)
 
 
 
@@ -174,8 +175,8 @@ class simulationInTime:
         self.sets = self.generateQValuesForAllSets()
 
     def generateInsulatingThicknessValues(self):
-        numberOfValues = 1
-        step = 0.005   # m
+        numberOfValues = 5
+        step = 0.010   # m
         return [round(value * step, 6) for value in range(numberOfValues)]
 
     def generateTimeValues(self):
@@ -212,7 +213,7 @@ class simulationInTime:
 
     def plot(self):
         for i in range(len(self.insulatingThicknessValues)):
-            thickness = self.insulatingThicknessValues[i]
+            # thickness = self.insulatingThicknessValues[i]
             # set = self.sets[i]
             # plt.plot(self.timeValues,set,label='%s' % str(thickness))
 
@@ -222,7 +223,9 @@ class simulationInTime:
             plt.plot(self.timeValues,set,label='qEvap')
             set = self.sets[i][2]
             plt.plot(self.timeValues,set,label='qColdWater')
-        plt.legend(title="Épaisseur d'isolant (m)")
+        # plt.legend(title="Épaisseur d'isolant (m)")
+        plt.legend(title="Isolant de 5 mm d'épaisseur")
+
         plt.xlabel('Temps (jours)')
         plt.ylabel('Énergie perdue (W)')
         plt.title('Un beau titre')

@@ -16,7 +16,7 @@ class qOut:
 
         self.waterTemperature = 37 + 273    # Kelvin
         self.waterifg = 2414 * 1000    # J/kg @ 37°C
-        self.waterh = 1    # TROUVER LE H DE L'EAU DANS LE BASSIN
+        # self.waterh = 1    # TROUVER LE H DE L'EAU DANS LE BASSIN
 
         self.airTemperature = self.getAirTemperature()
         self.airCp = 1.007 * 1000    # J/kgK @ 25°C
@@ -142,9 +142,8 @@ class qOut:
         return self.mDot * self.coldWaterCp * (self.waterTemperature - self.coldWaterTemprature)
 
     def getqSurfaces(self):
-        equivalentR = ( 0* (self.getTopRConvectionWithAir())**-1
-                        + (self.getSidesRConvectionWithWater()
-                           + self.getSidesRConductionInGlass()
+        equivalentR = ( (self.getTopRConvectionWithAir())**-1
+                        + (self.getSidesRConductionInGlass()
                            + self.getSidesRConductionInInsulating()
                            + self.getSidesRConvectionWithAir() )**-1 )**-1
         return (self.waterTemperature - self.airTemperature)/equivalentR
@@ -155,8 +154,8 @@ class qOut:
     def getTopRConvectionWithAir(self):
         return 1 / (self.airTopH * self.poolTopSurface)
 
-    def getSidesRConvectionWithWater(self):
-        return 0 * 1 / (self.waterh * self.poolSidesSurface)
+    # def getSidesRConvectionWithWater(self):
+    #     return 0 * 1 / (self.waterh * self.poolSidesSurface)
 
     def getSidesRConductionInGlass(self):
         return self.glassThickness / (self.glassk * self.poolSidesSurface)
@@ -166,28 +165,6 @@ class qOut:
 
     def getSidesRConvectionWithAir(self):
         return 1 / (self.airSidesH * self.poolSidesSurface)
-
-
-# a = qOut()
-# print(a.qColdWater)
-# print(a.__dict__)
-# values = []
-# print(a.insulatingThickness)
-# for i in range(5):
-#     a.updateTime(timeStep * (i + 1))
-#     print(a.qColdWater, a.qEvap, a.qSurfaces)
-#     values.append(a.qTot)
-# print(values)
-#
-# a = qOut()
-# a.updateThickness(0.005)
-# print(a.insulatingThickness)
-# values =  []
-# for i in range(5):
-#     a.updateTime(timeStep * (i + 1))
-#     values.append(a.airK)
-# print(values)
-
 
 
 class simulationInTime:
@@ -208,7 +185,6 @@ class simulationInTime:
 
     def generateTimeValues(self):
         return ([(step + 1) * self.timeStep for step in range(int(self.numberOfDays / self.timeStep))])
-
 
     ## TO GRAPH Q_TOT FOR DIFFERENT INSULATING THICKNESSES
     
@@ -268,7 +244,32 @@ class simulationInTime:
         plt.ylabel('Énergie perdue (W)')
         plt.title('Un beau titre')
         plt.savefig('Q1-qOutOverTime_3lines', bbox_inches='tight')
+        
+        
+        
+        
+    def generateValues(self, thickness = 0):
+        q = qOut()
+        q.updateThickness(thickness)
+        airTopK = list()
+        for time in self.timeValues:
+            q.updateTime(time)
+            print(q.__dict__)
+            airTopK.append(q.airTopK)
+        return airTopK
+
+    def plot(self, thickness):
+        set = self.generateValues(thickness=thickness)
+
+        plt.figure()
+        plt.plot(self.timeValues,set,label='q_')
+
+        plt.legend(title="Isolant de %s m d'épaisseur" % thickness)
+        plt.xlabel('Temps (jours)')
+        plt.ylabel('Énergie perdue (W)')
+        plt.title('Un beau titre')
+        plt.savefig('Q1-qOutOverTime_whatever', bbox_inches='tight')
 
 a = simulationInTime()
 a.plotQtot()
-a.plot3lines(0)
+a.plot3lines(0.01)

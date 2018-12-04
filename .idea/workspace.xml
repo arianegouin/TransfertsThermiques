@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1bff5ee4-e68b-4de1-a374-99b56ca622b0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Q1-qOutOverTime.png" beforeDir="false" afterPath="$PROJECT_DIR$/Q1-qOutOverTime.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Q1-qOutOverTime_3lines.png" beforeDir="false" afterPath="$PROJECT_DIR$/Q1-qOutOverTime_3lines.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/questionOne.py" beforeDir="false" afterPath="$PROJECT_DIR$/questionOne.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,14 +20,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="questionOne.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="questionOne.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/questionOne.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="186" column="19" selection-start-line="186" selection-start-column="19" selection-end-line="186" selection-end-column="19" />
+            <state relative-caret-position="204">
+              <caret line="274" column="18" lean-forward="true" selection-start-line="274" selection-start-column="18" selection-end-line="274" selection-end-column="18" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1543531870663" expanded="true" signature="7996:8354" ph="..." />
+                <element signature="e#92#6672#0" />
+                <element signature="e#7155#10584#0" />
               </folding>
             </state>
           </provider>
@@ -38,7 +39,7 @@
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file leaf-file-name="Q1-qOutOverTime.png" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Q1-qOutOverTime.png" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Q1-qOutOverTime.png">
           <provider selected="true" editor-type-id="images" />
         </entry>
@@ -71,7 +72,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
-    <option name="width" value="1454" />
+    <option name="width" value="1455" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -210,10 +211,10 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.31930333" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12147651" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12281879" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.25100672" />
+      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.25100672" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -240,11 +241,30 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/questionOne.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3162">
+          <caret line="186" column="19" selection-start-line="186" selection-start-column="19" selection-end-line="186" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#92#6672#0" />
+            <element signature="e#7155#10584#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Q1-qOutOverTime_3lines.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Q1-qOutOverTime.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/questionOne.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1543531870663" expanded="true" signature="7996:8354" ph="..." />
+            <element signature="e#92#6672#0" />
+            <element signature="e#7155#10584#0" />
           </folding>
         </state>
       </provider>
@@ -268,7 +288,8 @@
           <caret line="183" column="48" selection-start-line="183" selection-start-column="48" selection-end-line="183" selection-end-column="48" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1543531870663" expanded="true" signature="7996:8354" ph="..." />
+            <element signature="e#92#6672#0" />
+            <element signature="e#7155#10584#0" />
           </folding>
         </state>
       </provider>
@@ -293,19 +314,20 @@
     <entry file="file://$PROJECT_DIR$/Q1-qOutOverTime_3lines.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/Q1-qOutOverTime.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/questionOne.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="186" column="19" selection-start-line="186" selection-start-column="19" selection-end-line="186" selection-end-column="19" />
+        <state relative-caret-position="204">
+          <caret line="274" column="18" lean-forward="true" selection-start-line="274" selection-start-column="18" selection-end-line="274" selection-end-column="18" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1543531870663" expanded="true" signature="7996:8354" ph="..." />
+            <element signature="e#92#6672#0" />
+            <element signature="e#7155#10584#0" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Q1-qOutOverTime.png">
-      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
   <component name="hg4idea.settings">
